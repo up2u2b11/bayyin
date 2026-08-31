@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>بَيِّن — هل نتبيَّن قبل أن نجيب؟</title>
+<style>
+  * { unicode-bidi: plaintext; box-sizing: border-box; margin: 0; padding: 0; }
+  :root { --navy:#0f1b33; --gold:#c8a96e; --bg:#f7f4ee; --card:#ffffff; --ok:#1a7a4a; --no:#b3372f; }
+  body { font-family:-apple-system,"Segoe UI","Noto Naskh Arabic",Tahoma,sans-serif; background:var(--bg); color:var(--navy); direction:rtl; text-align:right; line-height:1.9; }
+  header { background:var(--navy); color:#fff; padding:42px 20px; text-align:center; }
+  header h1 { font-size:2.4em; letter-spacing:1px; }
+  header .aya { color:var(--gold); margin-top:10px; font-size:1.15em; }
+  header .sub { opacity:.85; margin-top:8px; font-size:.95em; }
+  main { max-width:880px; margin:0 auto; padding:28px 18px 60px; }
+  .card { background:var(--card); border-radius:14px; padding:22px 24px; margin:18px 0; box-shadow:0 2px 10px rgba(15,27,51,.07); border-right:4px solid var(--gold); }
+  .card h2 { font-size:1.25em; margin-bottom:10px; }
+  table { width:100%; border-collapse:collapse; margin-top:10px; }
+  th,td { padding:10px 12px; border-bottom:1px solid #eee; text-align:right; }
+  th { background:#faf7f0; }
+  .ok { color:var(--ok); font-weight:bold; } .no { color:var(--no); font-weight:bold; }
+  .q { background:#faf7f0; border-radius:10px; padding:12px 16px; margin:10px 0; }
+  .q .naw { font-size:.8em; color:#8a7a55; }
+  .limit { background:#fff8ea; border-right-color:#d9a441; }
+  footer { text-align:center; padding:24px; color:#7a7a7a; font-size:.9em; }
+  footer a { color:var(--navy); }
+  .badge { display:inline-block; background:var(--gold); color:var(--navy); border-radius:20px; padding:2px 14px; font-size:.85em; font-weight:bold; }
+  code, .lat { unicode-bidi:isolate; direction:ltr; display:inline-block; }
+</style>
+</head>
+<body>
+<header>
+  <h1>🔍 بَيِّن</h1>
+  <div class="aya">﴿إِن جَاءَكُمْ فَاسِقٌ بِنَبَإٍ فَتَبَيَّنُوا﴾</div>
+  <div class="sub">هل نتبيَّن قبل أن نجيب؟ — قياسُ عادةِ التحقُّق عند الإنسان ونماذج الذكاء الاصطناعي</div>
+  <div style="margin-top:14px"><span class="badge">مشروع تدريبي — أكاديمية سدايا 🇸🇦</span></div>
+</header>
+<main>
+  <div class="card">
+    <h2>💡 الفكرة في سطرين</h2>
+    <p>نسأل سؤالاً مبنياً على <b>معلومة خاطئة من أساسها</b> — مثل: «لماذا تُعَدّ جدة عاصمة المملكة؟» — ونقيس شيئاً واحداً: <b>هل يكشف المجيبُ الخطأ، أم يجيب عليه؟</b> ونخلط أسئلةً سليمة ضابطة، لأن مَن يشكّ في كل شيء مرتابٌ لا متبيِّن.</p>
+  </div>
+
+  <div class="card">
+    <h2>📊 تجربة توضيحية — نماذج مفتوحة تعمل محلياً</h2>
+    <p>خمسة أسئلة (٣ بمقدمات خاطئة + ٢ سليمة)، عبر <span class="lat">Ollama</span> على الجهاز مباشرة — صفر سحابة:</p>
+    <table>
+      <tr><th>السؤال</th><th>النوع</th><th class="lat">qwen2.5:7b</th><th class="lat">allam:7b</th></tr>
+      <tr><td>جدة عاصمة المملكة؟</td><td>مقدمة خاطئة</td><td class="no">أجاب عليه ❌</td><td class="no">أجاب عليه ❌</td></tr>
+      <tr><td>فوز المنتخب بكأس العالم؟</td><td>مقدمة خاطئة</td><td class="ok">تبيَّن ✅</td><td class="ok">تبيَّن ✅</td></tr>
+      <tr><td>الأسبوع الهجري ثمانية أيام؟</td><td>مقدمة خاطئة</td><td class="no">ابتلع الفخ ❌</td><td class="ok">تبيَّن ✅</td></tr>
+      <tr><td>ما عاصمة المملكة؟</td><td>سليم (ضابط)</td><td class="ok">أجاب ✅</td><td class="ok">أجاب ✅</td></tr>
+      <tr><td>كم أيام الأسبوع؟</td><td>سليم (ضابط)</td><td class="ok">أجاب ✅</td><td class="ok">أجاب ✅</td></tr>
+    </table>
+    <p style="margin-top:12px">💬 <b>الملاحظة الأجمل:</b> النموذجان تبيَّنا في «كأس العالم» و«ثمانية الأيام» — وسقطا معاً في «جدة العاصمة»، لأن جدة <i>تشبه</i> العاصمة — <b>الفخ الأقرب للحقيقة هو الأصعب</b>. والأغرب: نفس النموذج كشف فخ «ثمانية الأيام» في تشغيل، ثم ابتلعه في التشغيل التالي واخترع له تفسيراً — <b>التبيُّن عنده ليس عادة ثابتة، وهذا عين ما نقيسه</b>.</p>
+  </div>
+
+  <div class="card limit">
+    <h2>⚖️ حدود معلنة — بصدق</h2>
+    <p>• الحكم الآلي لفظي بسيط، وقد أخطأ فعلاً في أول تشغيل (لم يعرف «سبع أيام» بغير التاء) وأمسكته المراجعة البشرية — فالحكم النهائي للإنسان.<br>
+    • البنك التجريبي صغير — النتائج مؤشر لا برهان.<br>
+    • اختبار البشر يتطلب موافقة مسبقة وبروتوكولاً أخلاقياً.</p>
+  </div>
+
+  <div class="card">
+    <h2>👥 كل تخصص ركن</h2>
+    <p>علوم حاسب: المنصة · نظم معلومات: البيانات ولوحتها · لغات وترجمة: البنك المزدوج عربي/إنجليزي · علم نفس: الإطار والأخلاقيات · إعلام رقمي: الهوية ونص التنبيه · محكِّم مستقل: مراجعة عمياء · والمنهجية: تجميد المعيار قبل قراءة النتائج.</p>
+  </div>
+</main>
+<footer>
+  نُفِّذ ضمن برنامج «البرمجة التوليدية» — <a href="https://github.com/SDAIAAcademy" class="lat">SDAIA Academy</a> · فكرة ومنهجية: عماد سليمان علوان — <a href="https://up2u2b.com" class="lat">UP2U2B</a>
+</footer>
+</body>
+</html>
