@@ -57,14 +57,14 @@
   .sharh-host:hover .sharh-i, .sharh-host:focus-within .sharh-i, .sharh-host.open .sharh-i { border-color:var(--mint); color:var(--mint); -webkit-text-fill-color:var(--mint); box-shadow:0 0 0 4px rgba(46,230,168,.12); }
   .sharh { position:absolute; top:calc(100% + 12px); inset-inline-start:0; z-index:30; width:min(520px, 88vw);
     padding:16px 20px; border-radius:16px; background:rgba(12,19,32,.97); border:1px solid rgba(46,230,168,.32);
-    box-shadow:0 20px 60px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.03) inset; backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+    box-shadow:0 18px 50px rgba(0,0,0,.45), 0 0 0 1px rgba(255,255,255,.03) inset; backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
     color:var(--text); font-size:15px; line-height:1.9; text-align:right; font-family:'IBM Plex Sans Arabic',system-ui,sans-serif;
     font-weight:400; letter-spacing:0; -webkit-text-fill-color:var(--text);
-    opacity:0; visibility:hidden; transform:translateY(8px); transition:opacity .22s ease, transform .22s ease, visibility 0s linear .22s; pointer-events:none; }
+    opacity:0; visibility:hidden; transform:translateY(8px); transition:opacity .28s cubic-bezier(.2,.8,.2,1) .12s, transform .28s cubic-bezier(.2,.8,.2,1) .12s, visibility 0s linear .4s; pointer-events:none; }
   .sharh::before { content:''; position:absolute; top:-7px; inset-inline-start:28px; width:12px; height:12px; transform:rotate(45deg);
     background:rgba(12,19,32,.97); border-inline-start:1px solid rgba(46,230,168,.32); border-top:1px solid rgba(46,230,168,.32); }
   .sharh strong { color:var(--mint); -webkit-text-fill-color:var(--mint); }
-  .sharh-host:hover .sharh, .sharh-host:focus-within .sharh, .sharh-host.open .sharh { opacity:1; visibility:visible; transform:translateY(0); transition-delay:0s; }   /* البطاقةُ لا تُمسَك: الانتقالُ إلى الزرِّ يُغلقُها ويُظهرُ شرحَه */
+  .sharh-host:hover .sharh, .sharh-host:focus-within .sharh, .sharh-host.open .sharh { opacity:1; visibility:visible; transform:translateY(0); transition-delay:.09s,.09s,0s; }   /* البطاقةُ لا تُمسَك: الانتقالُ إلى الزرِّ يُغلقُها ويُظهرُ شرحَه */
   /* بطاقةُ العنوانِ الكبير: تطفو في الفراغِ إلى جانبِ العنوانِ (لا فوقَ الأزرار)، وعلى الشاشاتِ الضيّقةِ تحتَه */
   .sharh-host.sharh-hero .sharh { width:min(420px, 92vw); font-size:16px; top:50%; left:auto; right:calc(100% + 26px);   /* إلى يسارِ العنوانِ (الصفحةُ RTL) */
     transform:translateY(-50%) translateX(-8px); }
@@ -83,6 +83,22 @@
   .cta .sharh-host .sharh::before { top:auto; bottom:-7px; border:0; border-inline-end:1px solid rgba(46,230,168,.28); border-bottom:1px solid rgba(46,230,168,.28); }
   .sharh-host > h1, .sharh-host > h2 { display:inline; }
   @media (hover:none) { .sharh-host .sharh-i { cursor:pointer; } }
+  /* شرائحُ الخصوصيّة: الشريحةُ عنوانٌ والشرحُ بطاقةٌ تحتَها */
+  .pchips .sharh-host { display:inline-block; }
+  .pchips .sharh-host > span:first-child { display:inline-block; cursor:help; transition:.25s; }
+  .pchips .sharh-host:hover > span:first-child, .pchips .sharh-host:focus-within > span:first-child, .pchips .sharh-host.open > span:first-child { border-color:rgba(46,230,168,.45); color:var(--text); }
+  .pchips .sharh { width:min(320px, 88vw); font-size:13.5px; padding:12px 16px; top:calc(100% + 10px); }
+  .pchips:hover, .pchips:focus-within, .pchips.open { position:relative; z-index:50; }   /* الحاويةُ ترتفعُ فوقَ رسمِ البطلِ (سياقُ تراصٍّ من حركةِ rise) */
+  /* البلاطات: الرقمُ والاسمُ القصير ظاهران، والشرحُ والوسمُ بطاقةٌ تحتَ البلاطةِ عندَ التمرير */
+  .tile.sharh-host { overflow:visible; cursor:help; }   /* تخصيصٌ أعلى من قاعدةِ .tile اللاحقة (overflow:hidden) */
+  .tile.sharh-host .top { border-radius:18px 18px 0 0; }
+  .tile.sharh-host:hover, .tile.sharh-host:focus-within, .tile.sharh-host.open { z-index:40; }
+  .tile.sharh-host .lb { display:flex; align-items:center; gap:8px; font-size:14.5px; font-weight:600; color:var(--text); }
+  .tile .lb .dot { animation:glowPulse 2.4s infinite; }
+  .tile .sharh-i { margin-inline-start:auto; }
+  .tile.sharh-host .sharh { inset-inline:0; width:auto; top:calc(100% + 10px); font-size:14px; padding:14px 18px; }
+  .tile .sharh .tg { display:block; margin-top:6px; font-size:12px; color:var(--muted); -webkit-text-fill-color:var(--muted); }
+  .sharh .sharh-note { display:block; margin-top:8px; padding-top:8px; border-top:1px solid rgba(255,255,255,.07); font-size:13px; color:var(--muted); -webkit-text-fill-color:var(--muted); }
   .lede { font-size:19px; line-height:1.9; color:var(--body); max-width:520px; margin:20px 0 0; animation:rise .7s .3s ease both; }
   .lede strong { color:var(--mint); }
   .cta { display:flex; gap:14px; margin-top:32px; flex-wrap:wrap; animation:rise .7s .4s ease both; }
@@ -209,7 +225,7 @@
           <div class="sharh" role="tooltip" id="sharh-alt">منحنى كل نموذج عبر أسابيع المسطرة — نفس البنك المجمَّد يُعاد فيصعد السهم أو يهبط.</div></span>
       </div>
       <div class="pchips" aria-label="مؤشرات الخصوصية">
-        <span>يعمل محلياً — صفر سحابة</span><span>صفر إرسال وتتبع لبيانات الزائر</span><span>البيانات الخام منشورة كاملة</span><span>البنك مجمَّد <span class="lat">SHA-256</span></span>
+        <span class="sharh-host" tabindex="0" aria-describedby="sharh-p1"><span>يعمل محلياً — صفر سحابة</span><div class="sharh" role="tooltip" id="sharh-p1">الاختبارُ التفاعليُّ يجري في متصفحك، ونتائجُ النماذج قِيست على الجهاز مباشرةً عبر <span class="lat">Ollama</span> — لا خادمَ سحابيّاً في المسار.</div></span><span class="sharh-host" tabindex="0" aria-describedby="sharh-p2"><span>صفر إرسال وتتبع لبيانات الزائر</span><div class="sharh" role="tooltip" id="sharh-p2">لا استمارات ولا تتبّع: ما تختاره في التجربة يبقى في متصفحك ولا يغادره.</div></span><span class="sharh-host" tabindex="0" aria-describedby="sharh-p3"><span>البيانات الخام منشورة كاملة</span><div class="sharh" role="tooltip" id="sharh-p3">الأسئلةُ وأجوبةُ النماذج الخام ودرجاتُ الحكم منشورة في المستودع المفتوح — كل رقم في الصفحة يُراجَع من مصدره.</div></span><span class="sharh-host" tabindex="0" aria-describedby="sharh-p4"><span>البنك مجمَّد <span class="lat">SHA-256</span></span><div class="sharh" role="tooltip" id="sharh-p4">بنكُ الأسئلة جُمِّد ببصمة <span class="lat">SHA-256</span> قبل القياس — أي تعديل لاحق يغيّر البصمة فيُكشَف.</div></span>
       </div>
     </div>
     <div class="hero-viz">
@@ -237,18 +253,22 @@
 
 <section id="muashirat" class="wide" aria-label="مؤشرات مقيسة">
   <div class="tiles">
-    <div class="tile"><div class="top" style="background:linear-gradient(90deg,transparent,#e8b45a,transparent)"></div>
-      <div class="num" style="color:#e8b45a">5/10</div><div class="lb">allam:7b — مسطرة الأسبوع 1</div>
-      <div class="tag"><span class="dot" style="background:#e8b45a"></span>مقيس · حكم آلي مجمَّد</div></div>
-    <div class="tile"><div class="top" style="background:linear-gradient(90deg,transparent,#2ee6a8,transparent)"></div>
-      <div class="num" style="color:#2ee6a8">7/10</div><div class="lb">qwen2.5:14b — مسطرة الأسبوع 1</div>
-      <div class="tag"><span class="dot" style="background:#2ee6a8"></span>مقيس · حكم آلي مجمَّد</div></div>
-    <div class="tile"><div class="top" style="background:linear-gradient(90deg,transparent,#7fb8f0,transparent)"></div>
-      <div class="num" style="color:#7fb8f0">4/12</div><div class="lb">بخسُ الحكم الآلي الذي أمسكته المراجعة اليدوية — كله باتجاه واحد</div>
-      <div class="tag"><span class="dot" style="background:#7fb8f0"></span>مقيس · موثَّق بالنص الخام</div></div>
-    <div class="tile"><div class="top" style="background:linear-gradient(90deg,transparent,#e08fd0,transparent)"></div>
-      <div class="num" style="color:#e08fd0">2/10</div><div class="lb">انزياح لغوي (انزلاق للصينية وسط جواب عربي) عند qwen</div>
-      <div class="tag"><span class="dot" style="background:#e08fd0"></span>مقيس · شاهد خام محفوظ</div></div>
+    <div class="tile sharh-host" tabindex="0" aria-describedby="sharh-t1"><div class="top" style="background:linear-gradient(90deg,transparent,#e8b45a,transparent)"></div>
+      <div class="num" style="color:#e8b45a">5/10</div>
+      <div class="lb"><span class="dot" style="background:#e8b45a"></span>allam:7b<span class="sharh-i" aria-hidden="true">؟</span></div>
+      <div class="sharh" role="tooltip" id="sharh-t1">درجةُ <span class="lat">allam:7b</span> على مسطرة الأسبوع الأول من بنك التبيُّن المجمَّد.<span class="tg">مقيس · حكم آلي مجمَّد</span></div></div>
+    <div class="tile sharh-host" tabindex="0" aria-describedby="sharh-t2"><div class="top" style="background:linear-gradient(90deg,transparent,#2ee6a8,transparent)"></div>
+      <div class="num" style="color:#2ee6a8">7/10</div>
+      <div class="lb"><span class="dot" style="background:#2ee6a8"></span>qwen2.5:14b<span class="sharh-i" aria-hidden="true">؟</span></div>
+      <div class="sharh" role="tooltip" id="sharh-t2">درجةُ <span class="lat">qwen2.5:14b</span> على مسطرة الأسبوع الأول من بنك التبيُّن المجمَّد.<span class="tg">مقيس · حكم آلي مجمَّد</span></div></div>
+    <div class="tile sharh-host" tabindex="0" aria-describedby="sharh-t3"><div class="top" style="background:linear-gradient(90deg,transparent,#7fb8f0,transparent)"></div>
+      <div class="num" style="color:#7fb8f0">4/12</div>
+      <div class="lb"><span class="dot" style="background:#7fb8f0"></span>بخسُ الحكم الآلي<span class="sharh-i" aria-hidden="true">؟</span></div>
+      <div class="sharh" role="tooltip" id="sharh-t3">بخسُ الحكم الآلي الذي أمسكته المراجعة اليدوية — أربعة أحكام من اثني عشر، كلها باتجاه واحد.<span class="tg">مقيس · موثَّق بالنص الخام</span></div></div>
+    <div class="tile sharh-host" tabindex="0" aria-describedby="sharh-t4"><div class="top" style="background:linear-gradient(90deg,transparent,#e08fd0,transparent)"></div>
+      <div class="num" style="color:#e08fd0">2/10</div>
+      <div class="lb"><span class="dot" style="background:#e08fd0"></span>الانزياح اللغوي<span class="sharh-i" aria-hidden="true">؟</span></div>
+      <div class="sharh" role="tooltip" id="sharh-t4">انزياحٌ لغويّ عند <span class="lat">qwen</span>: انزلاقٌ إلى الصينية وسط جواب عربي في جوابين من عشرة.<span class="tg">مقيس · شاهد خام محفوظ</span></div></div>
   </div>
 </section>
 
@@ -278,7 +298,7 @@
 </section>
 
 <section id="sahm">
-  <div class="sharh-host" tabindex="0" aria-describedby="sharh-sahm"><h2>سهم النموذج — الارتقاء عبر أسابيع المسطرة</h2><span class="sharh-i" aria-hidden="true">؟</span><div class="sharh" role="tooltip" id="sharh-sahm">نفس البنك المجمَّد يُعاد أسبوعياً — فيصير لكل نموذج «سهمٌ» يصعد أو يهبط. <strong style="color:var(--text)">النقطة الأولى مقيسة فعلاً</strong>، والمنقَّط افتراضي تعليمي.</div></div>
+  <div class="sharh-host" tabindex="0" aria-describedby="sharh-sahm"><h2>سهم النموذج — الارتقاء عبر أسابيع المسطرة</h2><span class="sharh-i" aria-hidden="true">؟</span><div class="sharh" role="tooltip" id="sharh-sahm">نفس البنك المجمَّد يُعاد أسبوعياً — فيصير لكل نموذج «سهمٌ» يصعد أو يهبط. <strong style="color:var(--text)">النقطة الأولى مقيسة فعلاً</strong>، والمنقَّط افتراضي تعليمي.<span class="sharh-note">القاعدة المكتوبة في المسطرة: فرق نقطة واحدة على /١٠ ضجيج — لا يُدّعى تغيّر إلا بفرق يثبت أسبوعين.</span></div></div>
   <div class="glass" style="padding:32px">
     <svg viewBox="0 0 820 300" role="img" style="width:100%;display:block;direction:ltr"
          aria-label="رسم بياني: الأسبوع الأول مقيس — qwen سبعة من عشرة وallam خمسة من عشرة، وأسبوعان قادمان منقطان افتراضيان">
@@ -298,12 +318,12 @@
       <text x="710" y="67" fill="#97a8c0" font-size="12" text-anchor="middle">⟵ افتراضي تعليمي</text>
     </svg>
   </div>
-  <p class="mutp" style="margin:18px 0 0;font-size:13px">القاعدة المكتوبة في المسطرة: فرق نقطة واحدة على /١٠ ضجيج — لا يُدّعى تغيّر إلا بفرق يثبت أسبوعين.</p>
+  
 </section>
 
 <section id="hisab">
   <div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap">
-    <h2>الحساب الشخصي</h2><span class="subtag gray">نموذج مفهومي — غير موصول بأي جهة</span>
+    <div class="sharh-host" tabindex="0" aria-describedby="sharh-hisab"><h2>الحساب الشخصي</h2><span class="sharh-i" aria-hidden="true">؟</span><div class="sharh" role="tooltip" id="sharh-hisab">الفكرة التي تكبر لاحقاً: كلُّ متخصصٍ يطوّر نموذجَه من بابه — واللوحة تجعل تطوّرَه <strong style="color:var(--text)">سهماً يُدرَس</strong> لا انطباعاً يُحكى · <a href="docs/rihlat-almustakhdim.md">رحلات المستخدم الست</a>.</div></div><span class="subtag gray">نموذج مفهومي — غير موصول بأي جهة</span>
   </div>
   <p style="color:var(--body);font-size:15px;line-height:1.9;margin:14px 0 28px;max-width:720px">الرؤية: لكل مستخدم متخصص حسابٌ يدخل إليه <strong>بالدخول الوطني الموحّد</strong> (التكامل الفعلي خارج نطاق هذه النسخة — تسجيل الدخول كله خارج النطاق بنص الـ<span class="lat">Mini PRD</span>)، فيجد نموذجَه وسهمَ تطوّرِه ومحاكمَه:</p>
   <div class="glass">
@@ -326,7 +346,7 @@
         <div class="bar" role="progressbar" aria-labelledby="m4" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"><div class="fill" style="width:90%;background:linear-gradient(90deg,#e08fd0,#e08fd088)"></div></div></div>
     </div>
   </div>
-  <p class="mutp" style="margin:18px 0 0;font-size:14px">الفكرة التي تكبر لاحقاً: كلُّ متخصصٍ يطوّر نموذجَه من بابه — واللوحة تجعل تطوّرَه <strong style="color:var(--text)">سهماً يُدرَس</strong> لا انطباعاً يُحكى · <a href="docs/rihlat-almustakhdim.md">رحلات المستخدم الست</a>.</p>
+  
 </section>
 
 <section id="mahakim" class="wide">
@@ -425,11 +445,12 @@
       if (e.target.closest('a')) return;            // الزرُّ يذهبُ إلى وجهتِه ولا يُمسَك
       var was = h.classList.contains('open');
       hosts.forEach(function(x){ x.classList.remove('open'); });
-      if (!was) h.classList.add('open');
+      document.querySelectorAll('.pchips.open').forEach(function(x){ x.classList.remove('open'); });
+      if (!was) { h.classList.add('open'); var pc = h.closest('.pchips'); if (pc) pc.classList.add('open'); }
       e.stopPropagation();
     });
   });
-  document.addEventListener('click', function(){ hosts.forEach(function(x){ x.classList.remove('open'); }); });
+  document.addEventListener('click', function(){ hosts.forEach(function(x){ x.classList.remove('open'); }); document.querySelectorAll('.pchips.open').forEach(function(x){ x.classList.remove('open'); }); });
   document.addEventListener('keydown', function(e){ if (e.key === 'Escape') { hosts.forEach(function(x){ x.classList.remove('open'); }); document.activeElement && document.activeElement.blur(); } });
 })();
 </script>
