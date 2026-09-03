@@ -48,6 +48,41 @@
   h1.title { margin:0; font-family:'Aref Ruqaa',serif; font-size:clamp(64px,9vw,110px); line-height:1.05;
     background:linear-gradient(180deg,#fff 30%,var(--mint) 130%); -webkit-background-clip:text; background-clip:text;
     color:transparent; animation:rise .7s .2s ease both; }
+  /* ── الشرحُ عندَ التمرير (مراجعةُ التسليم — طلبُ حنين المعيوف): الشرحُ يختفي من تحتِ العنوانِ ويظهرُ بطاقةً عندَ المرورِ عليه ── */
+  .sharh-host { position:relative; display:inline-block; max-width:100%; }
+  .sharh-host:hover, .sharh-host:focus-within, .sharh-host.open { z-index:40; }   /* فوقَ أزرارِ الدعوةِ (لها سياقُ تراصٍّ من حركةِ rise) */
+  .sharh-host .sharh-i { display:inline-grid; place-items:center; width:22px; height:22px; margin-inline-start:10px; border-radius:50%;
+    border:1px solid rgba(255,255,255,.18); color:var(--muted); font-size:12px; font-weight:600; vertical-align:middle; line-height:1;
+    font-family:'IBM Plex Sans Arabic',system-ui,sans-serif; -webkit-text-fill-color:var(--muted); transition:.25s; cursor:help; }
+  .sharh-host:hover .sharh-i, .sharh-host:focus-within .sharh-i, .sharh-host.open .sharh-i { border-color:var(--mint); color:var(--mint); -webkit-text-fill-color:var(--mint); box-shadow:0 0 0 4px rgba(46,230,168,.12); }
+  .sharh { position:absolute; top:calc(100% + 12px); inset-inline-start:0; z-index:30; width:min(520px, 88vw);
+    padding:16px 20px; border-radius:16px; background:rgba(12,19,32,.97); border:1px solid rgba(46,230,168,.32);
+    box-shadow:0 20px 60px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.03) inset; backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+    color:var(--text); font-size:15px; line-height:1.9; text-align:right; font-family:'IBM Plex Sans Arabic',system-ui,sans-serif;
+    font-weight:400; letter-spacing:0; -webkit-text-fill-color:var(--text);
+    opacity:0; visibility:hidden; transform:translateY(8px); transition:opacity .22s ease, transform .22s ease, visibility 0s linear .22s; pointer-events:none; }
+  .sharh::before { content:''; position:absolute; top:-7px; inset-inline-start:28px; width:12px; height:12px; transform:rotate(45deg);
+    background:rgba(12,19,32,.97); border-inline-start:1px solid rgba(46,230,168,.32); border-top:1px solid rgba(46,230,168,.32); }
+  .sharh strong { color:var(--mint); -webkit-text-fill-color:var(--mint); }
+  .sharh-host:hover .sharh, .sharh-host:focus-within .sharh, .sharh-host.open .sharh { opacity:1; visibility:visible; transform:translateY(0); transition-delay:0s; }   /* البطاقةُ لا تُمسَك: الانتقالُ إلى الزرِّ يُغلقُها ويُظهرُ شرحَه */
+  /* بطاقةُ العنوانِ الكبير: تطفو في الفراغِ إلى جانبِ العنوانِ (لا فوقَ الأزرار)، وعلى الشاشاتِ الضيّقةِ تحتَه */
+  .sharh-host.sharh-hero .sharh { width:min(420px, 92vw); font-size:16px; top:50%; left:auto; right:calc(100% + 26px);   /* إلى يسارِ العنوانِ (الصفحةُ RTL) */
+    transform:translateY(-50%) translateX(-8px); }
+  .sharh-host.sharh-hero:hover .sharh, .sharh-host.sharh-hero:focus-within .sharh, .sharh-host.sharh-hero.open .sharh { transform:translateY(-50%) translateX(0); }
+  .sharh-host.sharh-hero .sharh::before { top:50%; left:auto; right:-7px; margin-top:-6px; transform:rotate(45deg);
+    border:0; border-right:1px solid rgba(46,230,168,.28); border-top:1px solid rgba(46,230,168,.28); }
+  @media (max-width:780px){
+    .sharh-host.sharh-hero .sharh { top:calc(100% + 12px); right:0; left:auto; transform:translateY(8px); }
+    .sharh-host.sharh-hero:hover .sharh, .sharh-host.sharh-hero:focus-within .sharh, .sharh-host.sharh-hero.open .sharh { transform:translateY(0); }
+    .sharh-host.sharh-hero .sharh::before { top:-7px; right:28px; left:auto; margin-top:0; border:0;
+      border-right:1px solid rgba(46,230,168,.28); border-top:1px solid rgba(46,230,168,.28); }
+  }
+  /* بطاقاتُ الأزرار: تصعدُ فوقَ الزرِّ حتى لا تغطّيَ شرائحَ الخصوصيّةِ تحتَه */
+  .cta .sharh-host .sharh { width:min(340px, 88vw); font-size:14px; padding:12px 16px; top:auto; bottom:calc(100% + 12px); transform:translateY(-8px); }
+  .cta .sharh-host:hover .sharh, .cta .sharh-host:focus-within .sharh, .cta .sharh-host.open .sharh { transform:translateY(0); }
+  .cta .sharh-host .sharh::before { top:auto; bottom:-7px; border:0; border-inline-end:1px solid rgba(46,230,168,.28); border-bottom:1px solid rgba(46,230,168,.28); }
+  .sharh-host > h1, .sharh-host > h2 { display:inline; }
+  @media (hover:none) { .sharh-host .sharh-i { cursor:pointer; } }
   .lede { font-size:19px; line-height:1.9; color:var(--body); max-width:520px; margin:20px 0 0; animation:rise .7s .3s ease both; }
   .lede strong { color:var(--mint); }
   .cta { display:flex; gap:14px; margin-top:32px; flex-wrap:wrap; animation:rise .7s .4s ease both; }
@@ -163,11 +198,15 @@
   <div class="hero-grid">
     <div>
       <div class="aya">﴿إِن جَاءَكُمْ فَاسِقٌ بِنَبَإٍ فَتَبَيَّنُوا﴾</div>
-      <h1 class="title">بَيِّن</h1>
-      <p class="lede">مختبرٌ عربيٌّ مفتوحٌ يقيسُ <strong>عادةَ التبيُّن</strong> — هل نتحقق من صحة السؤال قبل أن نجيب؟ عند الإنسان ونماذج الذكاء الاصطناعي معاً.</p>
+      <div class="sharh-host sharh-hero" tabindex="0" aria-describedby="sharh-title">
+        <h1 class="title">بَيِّن</h1><span class="sharh-i" aria-hidden="true">؟</span>
+        <div class="sharh" role="tooltip" id="sharh-title">مختبرٌ عربيٌّ مفتوحٌ يقيسُ <strong>عادةَ التبيُّن</strong> — هل نتحقق من صحة السؤال قبل أن نجيب؟ عند الإنسان ونماذج الذكاء الاصطناعي معاً.</div>
+      </div>
       <div class="cta">
-        <a class="go" href="#jarrib">جرِّب التبيُّن الآن</a>
-        <a class="alt" href="#sahm">شاهد سهم الارتقاء</a>
+        <span class="sharh-host"><a class="go" href="#jarrib" aria-describedby="sharh-go">جرِّب التبيُّن الآن</a>
+          <div class="sharh" role="tooltip" id="sharh-go">ثلاثة أسئلة، أمام كل سؤال قراران — يجري في متصفحك فقط، بلا إرسال.</div></span>
+        <span class="sharh-host"><a class="alt" href="#sahm" aria-describedby="sharh-alt">شاهد سهم الارتقاء</a>
+          <div class="sharh" role="tooltip" id="sharh-alt">منحنى كل نموذج عبر أسابيع المسطرة — نفس البنك المجمَّد يُعاد فيصعد السهم أو يهبط.</div></span>
       </div>
       <div class="pchips" aria-label="مؤشرات الخصوصية">
         <span>يعمل محلياً — صفر سحابة</span><span>صفر إرسال وتتبع لبيانات الزائر</span><span>البيانات الخام منشورة كاملة</span><span>البنك مجمَّد <span class="lat">SHA-256</span></span>
@@ -220,15 +259,13 @@
 
 <section id="jarrib" class="slim">
   <div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap">
-    <h2>جرِّبها بنفسك الآن</h2><span class="subtag">تفاعلي — يجري في متصفحك فقط</span>
+    <div class="sharh-host" tabindex="0" aria-describedby="sharh-jarrib"><h2>جرِّبها بنفسك الآن</h2><span class="sharh-i" aria-hidden="true">؟</span><div class="sharh" role="tooltip" id="sharh-jarrib">ثلاثة أسئلة، أمام كل سؤال قراران. نفس الفخاخ التي سقطت فيها النماذج — هل تنجو أنت؟</div></div><span class="subtag">تفاعلي — يجري في متصفحك فقط</span>
   </div>
-  <p class="mutp">ثلاثة أسئلة، أمام كل سؤال قراران. نفس الفخاخ التي سقطت فيها النماذج — هل تنجو أنت؟</p>
   <div class="glass" id="quizbox" style="min-height:260px"></div>
 </section>
 
 <section id="natijah">
-  <h2>أرقام حقيقية — نماذج مفتوحة تعمل محلياً</h2>
-  <p class="mutp">البنك التجريبي (٥ أسئلة) عبر <span class="lat">Ollama</span> على الجهاز مباشرة، على نموذجين:</p>
+  <div class="sharh-host" tabindex="0" aria-describedby="sharh-natijah"><h2>أرقام حقيقية — نماذج مفتوحة تعمل محلياً</h2><span class="sharh-i" aria-hidden="true">؟</span><div class="sharh" role="tooltip" id="sharh-natijah">البنك التجريبي (٥ أسئلة) عبر <span class="lat">Ollama</span> على الجهاز مباشرة، على نموذجين:</div></div>
   <div class="tblwrap"><div class="rtable" role="table" aria-label="نتائج البنك التجريبي">
     <div class="rrow hd" role="row"><div role="columnheader">السؤال</div><div role="columnheader">النوع</div><div role="columnheader" class="lat">qwen2.5:7b</div><div role="columnheader" class="lat">allam:7b</div></div>
     <div class="rrow" role="row"><div role="cell" class="qq">جدة عاصمة المملكة؟</div><div role="cell" class="tp" style="color:var(--gold)">مقدمة خاطئة</div><div role="cell" class="lose-c">أجاب عليه ✗</div><div role="cell" class="lose-c">أجاب عليه ✗</div></div>
@@ -241,8 +278,7 @@
 </section>
 
 <section id="sahm">
-  <h2>سهم النموذج — الارتقاء عبر أسابيع المسطرة</h2>
-  <p class="mutp">نفس البنك المجمَّد يُعاد أسبوعياً — فيصير لكل نموذج «سهمٌ» يصعد أو يهبط. <strong style="color:var(--text)">النقطة الأولى مقيسة فعلاً</strong>، والمنقَّط افتراضي تعليمي.</p>
+  <div class="sharh-host" tabindex="0" aria-describedby="sharh-sahm"><h2>سهم النموذج — الارتقاء عبر أسابيع المسطرة</h2><span class="sharh-i" aria-hidden="true">؟</span><div class="sharh" role="tooltip" id="sharh-sahm">نفس البنك المجمَّد يُعاد أسبوعياً — فيصير لكل نموذج «سهمٌ» يصعد أو يهبط. <strong style="color:var(--text)">النقطة الأولى مقيسة فعلاً</strong>، والمنقَّط افتراضي تعليمي.</div></div>
   <div class="glass" style="padding:32px">
     <svg viewBox="0 0 820 300" role="img" style="width:100%;display:block;direction:ltr"
          aria-label="رسم بياني: الأسبوع الأول مقيس — qwen سبعة من عشرة وallam خمسة من عشرة، وأسبوعان قادمان منقطان افتراضيان">
@@ -377,6 +413,24 @@
     }
   }
   render();
+})();
+</script>
+<script>
+(function(){
+  // الشرحُ عندَ التمرير: التمريرُ والتركيزُ بـCSS؛ النقرُ/اللمسُ هنا (الهواتفُ بلا تمرير)
+  var hosts = document.querySelectorAll('.sharh-host');
+  hosts.forEach(function(h){
+    var i = h.querySelector('.sharh-i');
+    (i || h).addEventListener('click', function(e){
+      if (e.target.closest('a')) return;            // الزرُّ يذهبُ إلى وجهتِه ولا يُمسَك
+      var was = h.classList.contains('open');
+      hosts.forEach(function(x){ x.classList.remove('open'); });
+      if (!was) h.classList.add('open');
+      e.stopPropagation();
+    });
+  });
+  document.addEventListener('click', function(){ hosts.forEach(function(x){ x.classList.remove('open'); }); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') { hosts.forEach(function(x){ x.classList.remove('open'); }); document.activeElement && document.activeElement.blur(); } });
 })();
 </script>
 </body>
